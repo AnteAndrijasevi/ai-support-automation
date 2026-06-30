@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Evaluation harness output (generated; see eval/run_eval.py)
+eval/report.md
