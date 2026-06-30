@@ -57,16 +57,28 @@ async def engine():
 
 
 @pytest_asyncio.fixture
-async def db_session(engine):
+async def db_connection(engine):
     connection = await engine.connect()
     trans = await connection.begin()
-    session_factory = async_sessionmaker(
-        bind=connection, expire_on_commit=False, join_transaction_mode="create_savepoint"
-    )
-    async with session_factory() as session:
-        yield session
+    yield connection
     await trans.rollback()
     await connection.close()
+
+
+@pytest_asyncio.fixture
+def db_session_factory(db_connection):
+    """A session factory bound to the per-test transactional connection. Most
+    tests just want `db_session` below; this is for cases (like the MCP server,
+    which calls `async_session_factory()` itself) that need the factory."""
+    return async_sessionmaker(
+        bind=db_connection, expire_on_commit=False, join_transaction_mode="create_savepoint"
+    )
+
+
+@pytest_asyncio.fixture
+async def db_session(db_session_factory):
+    async with db_session_factory() as session:
+        yield session
 
 
 @pytest_asyncio.fixture
