@@ -1,0 +1,74 @@
+[
+  {
+    "subject": "Charged twice for my subscription this month",
+    "body": "Hi, I just noticed two charges of $12.99 on my card on the same day (June 14th) for my Nimbus Cloud Storage Plus plan. My account email is the one I'm writing from. Can someone refund the duplicate charge? Invoice numbers are INV-88213 and INV-88214 if that helps."
+  },
+  {
+    "subject": "Can't log in after password reset",
+    "body": "I requested a password reset yesterday, set a new password, and now the app just says 'invalid credentials' every time I try to sign in on both the desktop app and the website. I've tried resetting it twice more with no luck. This is blocking me from accessing files I need for work today."
+  },
+  {
+    "subject": "Files not syncing between devices",
+    "body": "My laptop and desktop stopped syncing about three days ago. The sync icon just spins and never finishes. I've restarted the app and my computer several times. Folder is about 40GB if that matters. Not urgent, just annoying."
+  },
+  {
+    "subject": "Feature request: dark mode for mobile app",
+    "body": "Loving the service so far! Would be great if the mobile app had a dark mode option like the desktop app already does. Not a big deal, just a nice-to-have for night time use."
+  },
+  {
+    "subject": "How do I share a folder with someone outside my team?",
+    "body": "I'm trying to figure out how to share a folder with a contractor who doesn't have a Nimbus account. Do they need to sign up, or is there a way to send a link that works for anyone? Couldn't find clear docs on this."
+  },
+  {
+    "subject": "URGENT - lost access to all my files before a client deadline",
+    "body": "I opened the app this morning and every single file in my workspace shows as 'unavailable'. I have a client presentation in two hours and need these files immediately. Please help as soon as possible, this is extremely time sensitive."
+  },
+  {
+    "subject": "Question about storage plan limits",
+    "body": "I'm currently on the Basic plan with 100GB. If I upgrade to Plus mid-cycle, will I be charged a prorated amount or the full price? Just want to understand the billing before I switch."
+  },
+  {
+    "subject": "App crashes every time I open a large video file",
+    "body": "Whenever I try to preview an .mp4 file over about 2GB, the desktop app freezes for a few seconds and then crashes completely. Happens consistently, on both my Windows laptop and my work PC. Smaller files preview fine."
+  },
+  {
+    "subject": "Absolutely furious - cancelled my plan and still got billed",
+    "body": "I cancelled my subscription on May 2nd and got a confirmation email. I was just charged again on June 1st for $24.99. This is the second time something like this has happened and honestly I'm losing patience with this service. I want a full refund immediately."
+  },
+  {
+    "subject": "Suggestion: add a 'recently deleted' view like other apps have",
+    "body": "It would be really helpful to have a single place to see everything I've deleted recently across all folders, instead of having to dig through the trash in each folder separately. Just a suggestion for a future update."
+  },
+  {
+    "subject": "Two-factor authentication not sending codes",
+    "body": "I enabled 2FA last week and now the SMS codes aren't arriving when I try to log in from a new device. I've double checked my phone number is correct in settings. I'm locked out of my account right now and have important documents I need."
+  },
+  {
+    "subject": "Thank you for the quick support last week!",
+    "body": "Just wanted to say the support team helped me recover an accidentally deleted folder really quickly last Tuesday. Really appreciated the fast turnaround, made my day a lot less stressful. Keep up the good work!"
+  },
+  {
+    "subject": "Mobile app won't update past version 4.2",
+    "body": "The App Store shows an update is available but every time I tap update it downloads partway and then fails with a generic error. I've tried deleting and reinstalling the app twice. Not urgent but would like the new features."
+  },
+  {
+    "subject": "Need an itemized invoice for my company's expense report",
+    "body": "Could someone send me an itemized invoice for the last three months of charges on my business account? My finance team needs it for an expense report due Friday. Account is under the company name on file."
+  },
+  {
+    "subject": "Storage usage shown is way higher than my actual files",
+    "body": "The dashboard says I'm using 380GB but when I manually total up my folders it's closer to 210GB. This has been the case for a couple of weeks now. Wondering if there's some kind of caching bug or if I'm missing hidden files somewhere."
+  },
+  {
+    "subject": "Is there an API for automating uploads?",
+    "body": "We're a small team looking to automate nightly backups into our Nimbus folder from an internal script. Is there a public API or CLI tool available, and if so where can I find documentation and rate limits?"
+  },
+  {
+    "subject": "Accidentally downgraded my plan and lost extra storage",
+    "body": "I meant to click 'manage plan' but accidentally confirmed a downgrade from Plus to Basic. Now I'm over my new storage limit and can't upload new files. Can this be reversed without losing any of my existing files? Would appreciate help soon since I need to upload files today."
+  },
+  {
+    "subject": "Typo on the pricing page",
+    "body": "Small thing, but the pricing page lists the annual Plus plan as '$129.99/year' in one spot and '$199.99/year' in another section further down. Figured you'd want to know so it's consistent. Not affecting me directly."
+  }
+]
