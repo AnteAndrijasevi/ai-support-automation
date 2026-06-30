@@ -1,11 +1,11 @@
 import logging
 import time
-from collections.abc import Awaitable, Callable
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
+from starlette.types import ASGIApp, Receive, Scope, Send
 
 from app.api.routes import health, tickets
 from app.config import get_settings
@@ -35,23 +35,44 @@ app = FastAPI(
 )
 
 
-@app.middleware("http")
-async def log_requests(
-    request: Request, call_next: Callable[[Request], Awaitable[Response]]
-) -> Response:
-    start = time.perf_counter()
-    response = await call_next(request)
-    latency_ms = round((time.perf_counter() - start) * 1000, 2)
-    logger.info(
-        "request completed",
-        extra={
-            "path": request.url.path,
-            "method": request.method,
-            "status_code": response.status_code,
-            "latency_ms": latency_ms,
-        },
-    )
-    return response
+class RequestLoggingMiddleware:
+    """Pure ASGI middleware (not BaseHTTPMiddleware) so it doesn't run each
+    request in a separate task -- simpler, avoids known BaseHTTPMiddleware
+    issues with streaming/background tasks, and keeps coverage tooling able
+    to see straight through it."""
+
+    def __init__(self, app: ASGIApp) -> None:
+        self.app = app
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        start = time.perf_counter()
+        status_code = 500
+
+        async def send_wrapper(message) -> None:
+            nonlocal status_code
+            if message["type"] == "http.response.start":
+                status_code = message["status"]
+            await send(message)
+
+        await self.app(scope, receive, send_wrapper)
+
+        latency_ms = round((time.perf_counter() - start) * 1000, 2)
+        logger.info(
+            "request completed",
+            extra={
+                "path": scope["path"],
+                "method": scope["method"],
+                "status_code": status_code,
+                "latency_ms": latency_ms,
+            },
+        )
+
+
+app.add_middleware(RequestLoggingMiddleware)
 
 
 @app.exception_handler(SQLAlchemyError)
