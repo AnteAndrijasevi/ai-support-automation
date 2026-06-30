@@ -4,8 +4,10 @@ from collections.abc import Awaitable, Callable
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request, Response
+from fastapi.responses import JSONResponse
+from sqlalchemy.exc import SQLAlchemyError
 
-from app.api.routes import health
+from app.api.routes import health, tickets
 from app.config import get_settings
 from app.logging_config import configure_logging
 
@@ -52,4 +54,11 @@ async def log_requests(
     return response
 
 
+@app.exception_handler(SQLAlchemyError)
+async def database_error_handler(request: Request, exc: SQLAlchemyError) -> JSONResponse:
+    logger.error("database error", extra={"path": request.url.path, "error": str(exc)})
+    return JSONResponse(status_code=503, content={"detail": "Database temporarily unavailable"})
+
+
 app.include_router(health.router)
+app.include_router(tickets.router)

@@ -2,6 +2,7 @@
 (REST API, batch import, MCP tool, eval harness)."""
 
 import logging
+from dataclasses import dataclass
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -13,6 +14,12 @@ logger = logging.getLogger(__name__)
 LOW_CONFIDENCE_THRESHOLD = 0.6
 
 
+@dataclass
+class IngestResult:
+    ticket: Ticket
+    classification_error: str | None = None
+
+
 def derive_confidence_flag(confidence: float) -> ConfidenceFlag:
     return (
         ConfidenceFlag.LOW_CONFIDENCE
@@ -22,8 +29,7 @@ def derive_confidence_flag(confidence: float) -> ConfidenceFlag:
 
 
 async def classify_ticket(llm_client: LLMClient, subject: str, body: str) -> TicketClassification:
-    """Run a ticket through the LLM. Raises `LLMError` on failure; callers decide
-    whether that should fail the request or persist the ticket unclassified."""
+    """Run a ticket through the LLM. Raises `LLMError` on failure."""
     return await llm_client.classify_ticket(subject=subject, body=body)
 
 
@@ -33,13 +39,15 @@ async def ingest_ticket(
     *,
     subject: str,
     body: str,
-) -> Ticket:
+) -> IngestResult:
     """Persist a new ticket and run it through the AI pipeline.
 
-    The ticket row is always created. If the LLM call fails, the ticket is still
-    saved (so no customer-submitted ticket is ever silently lost) but left
-    unclassified for a later retry; the error is logged and re-raised so the
-    caller (e.g. the API layer) can return an appropriate response.
+    The ticket row is always created and committed -- no customer-submitted
+    ticket is ever lost because the LLM was unavailable. If classification
+    fails, the ticket is saved unclassified and the result carries a
+    human-readable `classification_error` instead of raising, so callers
+    (API routes, batch import, the MCP tool) all get the same degrade-gracefully
+    behavior without each having to special-case `LLMError`.
     """
     ticket = Ticket(subject=subject, body=body)
     db.add(ticket)
@@ -47,10 +55,10 @@ async def ingest_ticket(
 
     try:
         classification = await classify_ticket(llm_client, subject, body)
-    except LLMError:
+    except LLMError as exc:
         await db.commit()
-        logger.exception("LLM classification failed for ticket %s", ticket.id)
-        raise
+        logger.warning("LLM classification failed for ticket %s: %s", ticket.id, exc)
+        return IngestResult(ticket=ticket, classification_error=str(exc))
 
     ticket.category = classification.category
     ticket.urgency = classification.urgency
@@ -61,4 +69,4 @@ async def ingest_ticket(
 
     await db.commit()
     await db.refresh(ticket)
-    return ticket
+    return IngestResult(ticket=ticket)
