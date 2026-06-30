@@ -1,0 +1,33 @@
+name: Evaluation Harness
+
+# Manually triggered only -- this workflow makes real Anthropic API calls and
+# costs money, so it must never run automatically on push/PR (see ci.yml for
+# the workflow that does run automatically, using mocked LLM calls).
+on:
+  workflow_dispatch: {}
+
+jobs:
+  run-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Run evaluation harness
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python -m eval.run_eval --output-file eval/report.md
+
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-report
+          path: eval/report.md

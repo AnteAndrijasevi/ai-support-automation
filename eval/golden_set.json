@@ -1,0 +1,128 @@
+[
+  {
+    "id": "g01",
+    "subject": "Charged twice for my subscription this month",
+    "body": "Hi, I just noticed two charges of $14.99 on my card on the same day (June 3rd) for my Nimbus Plus plan. Invoice numbers are INV-77410 and INV-77411. Can someone refund the duplicate charge?",
+    "expected_category": "billing",
+    "expected_urgency": "medium"
+  },
+  {
+    "id": "g02",
+    "subject": "URGENT - lost access to all my files before a client deadline",
+    "body": "I opened the app this morning and every single file in my workspace shows as 'unavailable'. I have a client presentation in two hours and need these files immediately. Please help as soon as possible.",
+    "expected_category": "technical",
+    "expected_urgency": "critical"
+  },
+  {
+    "id": "g03",
+    "subject": "Feature request: dark mode for mobile app",
+    "body": "Loving the service so far! Would be great if the mobile app had a dark mode option like the desktop app already does. Not a big deal, just a nice-to-have for night time use.",
+    "expected_category": "feature_request",
+    "expected_urgency": "low"
+  },
+  {
+    "id": "g04",
+    "subject": "App crashes every time I open a large video file",
+    "body": "Whenever I try to preview an .mp4 file over about 2GB, the desktop app freezes for a few seconds and then crashes completely. Happens consistently on both my laptop and my work PC.",
+    "expected_category": "bug_report",
+    "expected_urgency": "medium"
+  },
+  {
+    "id": "g05",
+    "subject": "How do I change my account email address?",
+    "body": "I recently changed jobs and would like to update the email address associated with my account to my new personal email. I can't find this option in settings.",
+    "expected_category": "account",
+    "expected_urgency": "low"
+  },
+  {
+    "id": "g06",
+    "subject": "Two-factor authentication not sending codes",
+    "body": "I enabled 2FA last week and now the SMS codes aren't arriving when I try to log in from a new device. I'm locked out of my account right now and have important documents I need today.",
+    "expected_category": "account",
+    "expected_urgency": "high"
+  },
+  {
+    "id": "g07",
+    "subject": "Absolutely furious - cancelled my plan and still got billed",
+    "body": "I cancelled my subscription on May 2nd and got a confirmation email. I was just charged again on June 1st for $24.99. This is the second time this has happened. I want a full refund immediately.",
+    "expected_category": "billing",
+    "expected_urgency": "high"
+  },
+  {
+    "id": "g08",
+    "subject": "Suggestion: add a 'recently deleted' view",
+    "body": "It would be helpful to have a single place to see everything I've deleted recently across all folders, instead of digging through the trash in each folder separately. Just a suggestion for a future release.",
+    "expected_category": "feature_request",
+    "expected_urgency": "low"
+  },
+  {
+    "id": "g09",
+    "subject": "Files not syncing between devices",
+    "body": "My laptop and desktop stopped syncing about three days ago. The sync icon just spins and never finishes. I've restarted the app and my computer several times. Not urgent, just annoying.",
+    "expected_category": "technical",
+    "expected_urgency": "low"
+  },
+  {
+    "id": "g10",
+    "subject": "Mobile app won't update past version 4.2",
+    "body": "The App Store shows an update is available but every time I tap update it downloads partway and then fails with a generic error. I've tried deleting and reinstalling the app twice.",
+    "expected_category": "bug_report",
+    "expected_urgency": "low"
+  },
+  {
+    "id": "g11",
+    "subject": "Need an itemized invoice for my company's expense report",
+    "body": "Could someone send me an itemized invoice for the last three months of charges on my business account? My finance team needs it for an expense report due Friday.",
+    "expected_category": "billing",
+    "expected_urgency": "medium"
+  },
+  {
+    "id": "g12",
+    "subject": "Is there an API for automating uploads?",
+    "body": "We're a small team looking to automate nightly backups into our workspace from an internal script. Is there a public API or CLI tool available, and where can I find documentation and rate limits?",
+    "expected_category": "general",
+    "expected_urgency": "low"
+  },
+  {
+    "id": "g13",
+    "subject": "Thank you for the quick support last week!",
+    "body": "Just wanted to say the support team helped me recover an accidentally deleted folder really quickly last Tuesday. Really appreciated the fast turnaround. Keep up the good work!",
+    "expected_category": "general",
+    "expected_urgency": "low"
+  },
+  {
+    "id": "g14",
+    "subject": "Accidentally downgraded my plan and lost extra storage",
+    "body": "I meant to click 'manage plan' but accidentally confirmed a downgrade from Plus to Basic. Now I'm over my new storage limit and can't upload new files. I need to upload files today for a deadline.",
+    "expected_category": "billing",
+    "expected_urgency": "high"
+  },
+  {
+    "id": "g15",
+    "subject": "Storage usage shown is way higher than my actual files",
+    "body": "The dashboard says I'm using 380GB but when I manually total up my folders it's closer to 210GB. This has been the case for a couple of weeks now. Wondering if it's a caching bug.",
+    "expected_category": "bug_report",
+    "expected_urgency": "low"
+  },
+  {
+    "id": "g16",
+    "subject": "Can't log in after password reset",
+    "body": "I requested a password reset yesterday, set a new password, and now the app just says 'invalid credentials' every time, on both desktop and the website. I've tried resetting twice more with no luck.",
+    "expected_category": "account",
+    "expected_urgency": "high"
+  },
+  {
+    "id": "g17",
+    "subject": "Question about what happens to files after downgrade",
+    "body": "thinking about switching plans, what happens exactly, also is there a way to see all my devices connected to the account somewhere",
+    "expected_category": "general",
+    "expected_urgency": "low"
+  },
+  {
+    "id": "g18",
+    "subject": "Everything is broken help",
+    "body": "nothing works right now. tried a few things. still broken. please advise",
+    "expected_category": "technical",
+    "expected_urgency": "medium"
+  }
+]
